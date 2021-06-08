@@ -128,21 +128,13 @@
             <column-instance column='[compound_score]' derivation='Avg' name='[avg:compound_score:qk]' pivot='key' type='quantitative' />
             <column caption='Compound Score' datatype='real' name='[compound_score]' role='measure' type='quantitative' />
             <column caption='Created At' datatype='datetime' name='[created_at]' role='dimension' type='ordinal' />
-            <column-instance column='[created_at]' derivation='Day' name='[dy:created_at:ok]' pivot='key' type='ordinal' />
             <column-instance column='[created_at]' derivation='None' name='[none:created_at:qk]' pivot='key' type='quantitative' />
             <column-instance column='[compound_score]' derivation='Sum' name='[sum:compound_score:qk]' pivot='key' type='quantitative' />
             <column-instance column='[created_at]' derivation='Second-Trunc' name='[tsc:created_at:qk]' pivot='key' type='quantitative' />
           </datasource-dependencies>
-          <filter class='categorical' column='[federated.0xjdsyp0mjo71u1d7bxtj02rrwt7].[dy:created_at:ok]'>
-            <groupfilter function='member' level='[dy:created_at:ok]' member='4' user:ui-domain='relevant' user:ui-enumeration='inclusive' user:ui-marker='enumerate' />
-          </filter>
-          <filter class='quantitative' column='[federated.0xjdsyp0mjo71u1d7bxtj02rrwt7].[none:created_at:qk]' included-values='in-range-or-null'>
-            <min>#2021-06-02 19:25:00#</min>
-            <max>#2021-06-04 14:01:36#</max>
-          </filter>
+          <filter class='quantitative' column='[federated.0xjdsyp0mjo71u1d7bxtj02rrwt7].[none:created_at:qk]' included-values='all' />
           <slices>
             <column>[federated.0xjdsyp0mjo71u1d7bxtj02rrwt7].[none:created_at:qk]</column>
-            <column>[federated.0xjdsyp0mjo71u1d7bxtj02rrwt7].[dy:created_at:ok]</column>
           </slices>
           <aggregation value='true' />
         </view>
@@ -226,7 +218,6 @@
         </edge>
         <edge name='right'>
           <strip size='160'>
-            <card param='[federated.0xjdsyp0mjo71u1d7bxtj02rrwt7].[dy:created_at:ok]' type='filter' />
             <card param='[federated.0xjdsyp0mjo71u1d7bxtj02rrwt7].[none:created_at:qk]' show-domain='false' show-null-ctrls='false' type='filter' />
             <card pane-specification-id='0' param='[federated.0xjdsyp0mjo71u1d7bxtj02rrwt7].[sum:compound_score:qk]' type='color' />
           </strip>
