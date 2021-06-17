@@ -30,7 +30,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'app'  # Enable the inner app 
+    'app'  # Enable the inner app # apps.py is therefore not needed.
 ]
 
 MIDDLEWARE = [
@@ -76,6 +76,8 @@ DATABASES = {
         'NAME'  : 'db.sqlite3',
     }
 }
+
+
 
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators

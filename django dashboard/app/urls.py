@@ -9,9 +9,14 @@ from app import views
 urlpatterns = [
 
     # The home page
-    path('', views.index, name='home'),
+    path('', views.home, name='dashboard-home'),
+
+    # The profile
+    path('profile/', views.profile, name='dashboard-profile'),
+
 
     # Matches any html file
     re_path(r'^.*\.*', views.pages, name='pages'),
+
 
 ]

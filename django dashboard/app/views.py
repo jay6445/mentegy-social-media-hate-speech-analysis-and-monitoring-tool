@@ -9,17 +9,8 @@ from django.template import loader
 from django.http import HttpResponse
 from django import template
 
-@login_required(login_url="/login/")
-def index(request):
-    
-    context = {}
-    context['segment'] = 'index'
-
-    html_template = loader.get_template( 'index.html' )
-    return HttpResponse(html_template.render(context, request))
-
-@login_required(login_url="/login/")
-def pages(request):
+@login_required(login_url="/login/") 
+def pages(request):         # This function will match all the .html static files 
     context = {}
     # All resource paths end in .html.
     # Pick out the html file name from the url. And load that template.
@@ -28,7 +19,7 @@ def pages(request):
         load_template      = request.path.split('/')[-1]
         context['segment'] = load_template
         
-        html_template = loader.get_template( load_template )
+        html_template = loader.get_template(load_template )
         return HttpResponse(html_template.render(context, request))
         
     except template.TemplateDoesNotExist:
@@ -40,5 +31,47 @@ def pages(request):
     
         html_template = loader.get_template( 'page-500.html' )
         return HttpResponse(html_template.render(context, request))
+
+
+
+@login_required(login_url="/login/")
+def home(request): #This function will load the index.html particularly matching /
+    context = {}
+    try:
+        
+        html_template = loader.get_template( 'index.html' )
+        return HttpResponse(html_template.render(context, request))
+        
+    except template.TemplateDoesNotExist:
+
+        html_template = loader.get_template( 'page-404.html' )
+        return HttpResponse(html_template.render(context, request))
+
+    except:
+    
+        html_template = loader.get_template( 'page-500.html' )
+        return HttpResponse(html_template.render(context, request))
+
+
+@login_required(login_url="/login/")
+def profile(request): #This function will load the profile.html particularly matching /profile
+    context = {}
+
+    try:
+        
+        html_template = loader.get_template( 'profile.html' )
+        return HttpResponse(html_template.render(context, request))
+        
+    except template.TemplateDoesNotExist:
+
+        html_template = loader.get_template( 'page-404.html' )
+        return HttpResponse(html_template.render(context, request))
+
+    except:
+    
+        html_template = loader.get_template( 'page-500.html' )
+        return HttpResponse(html_template.render(context, request))
+
+        
 
 

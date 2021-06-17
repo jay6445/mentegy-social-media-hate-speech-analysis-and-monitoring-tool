@@ -563,7 +563,7 @@ var Charts = (function() {
   // Variable
 
   var $toggle = $('[data-toggle="chart"]');
-  var mode = 'light'; //(themeMode) ? themeMode : 'light';
+  var mode = 'dark'; //(themeMode) ? themeMode : 'light';
   var fonts = {
     base: 'Open Sans'
   }
@@ -1097,7 +1097,7 @@ var SalesChart = (function() {
         }
       },
       data: {
-        labels: ['May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+        labels: ['Jun 5', 'Jun 6', 'Jun 7', 'Jun 8', 'Jun 9', 'Jun 10', 'Jun 11', 'Jun 12'],
         datasets: [{
           label: 'Performance',
           data: [0, 20, 10, 30, 15, 40, 20, 60, 60]
