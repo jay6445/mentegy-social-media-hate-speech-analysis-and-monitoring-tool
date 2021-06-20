@@ -22,14 +22,14 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  
+
   <title>
     Argon Dashboard Django - {% block title %} Open-Source Admin Panel {% endblock %} | Creative-Tim
   </title>
 
   <!-- Favicon - loaded as static -->
   <link href="{% static 'assets/img/brand/favicon.png' %}" rel="icon" type="image/png">
-  
+
   <!-- Fonts -->
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
   <!-- Icons -->
@@ -57,9 +57,117 @@
 
   {% include "includes/scripts.html" %}
 
-  <!-- Specific JS goes HERE --> 
+  <!-- Specific JS goes HERE -->
   {% block javascripts %}{% endblock javascripts %}
 
 </body>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="https://momentjs.com/downloads/moment.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
+<script>
+
+
+  function livescores() {
+
+    var $scoreChart = $("#score-chart");
+    $.ajax({
+      url: $scoreChart.data("url"),
+      success: function (data) {
+
+        var ctx = $scoreChart[0].getContext("2d");
+        var gradientFill = ctx.createLinearGradient(0, 0, 0, 290);
+        gradientFill.addColorStop(0, "rgba(0, 255, 218, 1)");
+        gradientFill.addColorStop(1, "rgba(0, 255, 218, 0.1)");
+        new Chart(ctx, {
+          type: 'line',
+          data: {
+            labels: data.labels,
+            datasets: [{
+              label: 'Sentiment Score',
+
+              data: data.data,
+              backgroundColor: gradientFill,
+              borderColor: [
+                'rgba(0, 255, 218, 1)',
+              ],
+              borderWidth: 2,
+              pointBorderColor: "#fff",
+              pointBackgroundColor: "rgba(0, 255, 218, 1)"
+            }]
+          },
+          options: {
+            responsive: true,
+            legend: {
+              position: 'top',
+            },
+            title: {
+              display: true,
+              text: 'Live Sentiment Chart'
+            },
+
+          }
+        });
+
+      }
+    });
+
+  };
+
+  function staticscores() {
+
+    var $scoreChart = $("#score-chart");
+    $.ajax({
+      url: $scoreChart.data("url"),
+      success: function (data) {
+
+        var ctx = $scoreChart[0].getContext("2d");
+        var gradientFill = ctx.createLinearGradient(0, 0, 0, 290);
+        gradientFill.addColorStop(0, "rgba(0, 255, 218, 1)");
+        gradientFill.addColorStop(1, "rgba(0, 255, 218, 0.1)");
+        new Chart(ctx, {
+          type: 'line',
+          data: {
+            labels: data.labels,
+            datasets: [{
+              label: 'Sentiment Score',
+
+              data: data.data,
+              backgroundColor: gradientFill,
+              borderColor: [
+                'rgba(0, 255, 218, 1)',
+              ],
+              borderWidth: 2,
+              pointBorderColor: "#fff",
+              pointBackgroundColor: "rgba(0, 255, 218, 1)"
+            }]
+          },
+          options: {
+            responsive: true,
+            legend: {
+              position: 'top',
+            },
+            title: {
+              display: true,
+              text: 'Live Sentiment Chart'
+            },
+
+          }
+        });
+
+      }
+    });
+
+  };
+
+  $(document).ready(function () {
+    livescores();
+    //population();
+    setInterval(livescores, 1000);
+
+  });
+
+
+</script>
 
 </html>

@@ -3,11 +3,13 @@
 Copyright (c) 2019 - present AppSeed.us
 """
 
+from app.models import Twitter_Streams
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, get_object_or_404, redirect
 from django.template import loader
 from django.http import HttpResponse
 from django import template
+from django.http import JsonResponse
 
 @login_required(login_url="/login/") 
 def pages(request):         # This function will match all the .html static files 
@@ -72,6 +74,18 @@ def profile(request): #This function will load the profile.html particularly mat
         html_template = loader.get_template( 'page-500.html' )
         return HttpResponse(html_template.render(context, request))
 
-        
+@login_required(login_url="/login/")       
+def score_chart(request):
+    labels = []
+    data = []
 
+    queryset = Twitter_Streams.objects.values().order_by('-created_at')[:10]
+    for entry in queryset:
+        labels.append(entry['created_at'].strftime("%H:%M:%S"))
+        data.append(entry['compound_score'])
+    
+    return JsonResponse(data={
+        'labels': labels,
+        'data': data,
+    })
 
