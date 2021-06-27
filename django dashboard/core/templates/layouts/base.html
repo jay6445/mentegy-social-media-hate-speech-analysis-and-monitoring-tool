@@ -24,7 +24,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
   <title>
-    Argon Dashboard Django - {% block title %} Open-Source Admin Panel {% endblock %} | Creative-Tim
+    Mentegy
   </title>
 
   <!-- Favicon - loaded as static -->
@@ -36,7 +36,7 @@
   <link href="/static/assets/js/plugins/nucleo/css/nucleo.css" rel="stylesheet" />
   <link href="/static/assets/js/plugins/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet" />
   <!-- CSS Files -->
-  <link href="/static/assets/css/argon-dashboard.css?v=1.1.0" rel="stylesheet" />
+  <link href="/static/assets/css/argon-dashboard.css?v=1.2.0" rel="stylesheet" />
 
   <!-- Specific CSS goes HERE -->
   {% block stylesheets %}{% endblock stylesheets %}
@@ -160,12 +160,174 @@
 
   };
 
+  function dailyavgscores() {
+
+    var $dailyavgChart = $("#daily-avg-chart");
+    $.ajax({
+      url: $dailyavgChart.data("url"),
+      success: function (data) {
+
+        var ctx = $dailyavgChart[0].getContext("2d");
+        var gradientFill = ctx.createLinearGradient(0, 0, 0, 290);
+        gradientFill.addColorStop(0, "rgba(0, 255, 218, 1)");
+        gradientFill.addColorStop(1, "rgba(0, 255, 218, 0.1)");
+        new Chart(ctx, {
+          type: 'bar',
+          data: {
+            labels: data.labels,
+            datasets: [{
+              label: 'Sentiment Score',
+
+              data: data.data,
+              backgroundColor: gradientFill,
+              borderColor: [
+                'rgba(0, 255, 218, 1)',
+              ],
+              borderWidth: 2,
+              pointBorderColor: "#fff",
+              pointBackgroundColor: "rgba(0, 255, 218, 1)"
+            }]
+          },
+          options: {
+            responsive: true,
+            legend: {
+              position: 'top',
+            },
+            scales: {
+              xAxes: [{
+                display: true,
+
+                scaleLabel: {
+                  display: true,
+                  labelString: 'Day'
+                }
+              }],
+              yAxes: [{
+                display: true,
+
+                scaleLabel: {
+                  display: true,
+                  labelString: 'Score'
+                }
+              }]
+            },
+            title: {
+              display: true,
+              text: 'Live Sentiment Chart'
+            },
+
+          }
+        });
+
+      }
+    });
+
+  };
+
+  function totalavgscores() {
+
+    var $totalAvgChart = $("#total-avg-chart");
+    $.ajax({
+      url: $totalAvgChart.data("url"),
+      success: function (data) {
+
+        var ctx = $totalAvgChart[0].getContext("2d");
+        var gradientFill = ctx.createLinearGradient(0, 0, 0, 290);
+        gradientFill.addColorStop(0, "rgba(0, 255, 218, 1)");
+        gradientFill.addColorStop(1, "rgba(0, 255, 218, 0.1)");
+        new Chart(ctx, {
+          type: 'bar',
+          data: {
+            labels: data.labels,
+            datasets: [{
+              label: 'Sentiment Score Today',
+
+              data: data.data,
+              backgroundColor: gradientFill,
+              borderColor: [
+                'rgba(0, 255, 218, 1)',
+              ],
+              borderWidth: 2,
+              pointBorderColor: "#fff",
+              pointBackgroundColor: "rgba(0, 255, 218, 1)"
+
+            }]
+          },
+          options: {
+            responsive: true,
+            legend: {
+              position: 'top',
+            },
+            scales: {
+              xAxes: [{
+                display: true,
+                scaleLabel: {
+                  display: true,
+                  labelString: 'Day'
+                }
+              }],
+              yAxes: [{
+                display: true,
+                ticks: {
+
+                  stepSize: 2, // <----- This prop sets the stepSize
+                  max: 1
+                },
+                scaleLabel: {
+                  display: true,
+                  labelString: 'Score'
+                }
+              }]
+            },
+            title: {
+              display: true,
+              text: 'Live Sentiment Chart'
+            },
+
+          }
+        });
+
+      }
+    });
+
+  };
+
+
+  
+
+
   $(document).ready(function () {
     livescores();
-    //population();
-    setInterval(livescores, 1000);
+    totalavgscores();
+    dailyavgscores();
+    setInterval(livescores, 3000);
+    setInterval(totalavgscores, 10000);
+    setInterval(dailyavgscores, 10000);
+    $('.chart').css('height', 'auto')
 
   });
+
+  function golive(ref) {
+    var bclass = $(ref).attr('class');
+
+    if (bclass == 'notlive') {
+
+      $('#sidenav-main').detach();
+      var start = setInterval(livescores, 2000);
+      $(ref).css('background-color', 'red');
+      $(ref).html('Stop')
+      $(ref).attr('class', 'live');
+      console.log(ref);
+    }
+    else if (bclass == 'live') {
+      setTimeout(golive); //stop the set interval
+      $(ref).html('Go Live');
+      $(ref).attr('class', 'notlive');
+      console.log(ref);
+    }
+
+
+  }
 
 
 </script>

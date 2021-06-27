@@ -4557,6 +4557,7 @@ input[type="button"].btn-block {
   font-size: 1.25rem;
   line-height: inherit;
   white-space: nowrap;
+  
 }
 
 .navbar-brand:hover,
@@ -17271,7 +17272,7 @@ textarea[resize="horizontal"] {
   }
 
   .navbar-vertical.navbar-expand-md .navbar-brand-img {
-    max-height: 2.5rem;
+    max-height: 7.5rem;
   }
 
   .navbar-vertical.navbar-expand-md .navbar-user {

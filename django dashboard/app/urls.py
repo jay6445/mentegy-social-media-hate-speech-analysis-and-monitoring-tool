@@ -22,4 +22,13 @@ urlpatterns = [
     #live score chart
     path('score-chart/', views.score_chart, name='score-chart'),
 
+    #day avg chart
+    path('daily-avg/', views.daily_avg, name='daily-avg'),
+
+    #total average chart
+    path('total-avg/', views.total_avg, name='total-avg-chart'),
+
+    #tweets text
+    path('', views.get_tweets, name='tweet-text'),
+
 ]
