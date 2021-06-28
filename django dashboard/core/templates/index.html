@@ -220,8 +220,8 @@
         <div class="card-header bg-transparent">
           <div class="row align-items-center">
             <div class="col">
-              <h6 class="text-uppercase text-muted ls-1 mb-1">Performance</h6>
-              <h2 class="mb-0">Average Score Today</h2>
+              <h6 class="text-uppercase text-muted ls-1 mb-1">Overview</h6>
+              <h2 class="mb-0">Tweet Count</h2>
             </div>
           </div>
         </div>
@@ -229,17 +229,11 @@
           <!-- Chart -->
           <div class="chart">
             <!--<canvas id="chart-orders" class="chart-canvas"></canvas>-->
-            <canvas id="total-avg-chart" data-url="{% url 'total-avg-chart' %}" height:"1000"></canvas>
+            <canvas id="total-count-chart" data-url="{% url 'total-count-chart' %}" ></canvas>
           </div>
         </div>
       </div>
     </div>
-
-    {% for i in data %}
-    <div class="row">
-      {{ i }}
-    </div>
-    {% endfor %}
 
 
   </div>
@@ -271,42 +265,28 @@
               </tr>
             </thead>
             <tbody>
-
-              {% for tweet in view.get_tweets %}
-              <tr>
-                <td>{{tweet}</td>
-
-              </tr>
-              {% endfor %}
+              
               <tr>
                 <td>2021-06-23 12:33:40.00</td>
-                <td>SOOO CUTEEEE 😻😻😻\n#greatwarintorn #great_rider10
-                  https://t.co/MoWruqa8Ud</td>
+                <td>PSA to Black Americans/ADOS: You do not have the time or LUXURY to be worried about what’s  happening with other groups. Yes white supremacy has set several “houses” on fire but they did it to yours FIRST and you don’t have time to be running buckets of water to anybody else rn</td>
               </tr>
               <tr>
                 <td>2021-06-23 12:33:41.00</td>
-                <td> 📻 Aquesta setmana parlem amb Joan Perera arran del seu llibre de
-                  poemes sobre la Mare de Déu de #Núria @ValldeNuria i @xrocabas ens apropa a l\'actualitat musical
-                  cristiana. ↪️ https://t.co/VpUh0QKoDq #ràdio https://t.co/gNVksRzPRQ</td>
+                <td> He was killed again for false accusations of being a sexual abuser.  Here is a link to an article about someone being killed for being falsely accused of being a pedo.  You are not very smart are you?  https://t.co/7NJxVPopCz https://t.co/7gO4zOg18k</td>
               </tr>
               <tr>
                 <td>2021-06-23 12:33:41.00</td>
-                <td>We all love nyan cat on AWS App Runner.😎😎😎\n\nDevBeardOps -
-                  Playing with AWS App Runner\n\nhttps://t.co/0sGIM24ilk\n#AWSAppRunner #AWSCommunity
-                  https://t.co/7n16lC3gIM</td>
+                <td>Youths held coalition strike wearing black shirt and marched onto roads in #Dawei this afternoon. 
+
+                  #RecognizeNUG #WhatsHappeningInMyanmar #June28Coup https://t.co/Q29fOFrgKb</td>
               </tr>
               <tr>
                 <td>2021-06-23 12:33:42.00</td>
-                <td> El PSC demana que el Departament d\'Educació implementi les mesures
-                  acordades per mantenir els efectius, a fi de garantir que no hi hagi impactes negatius a les zones i
-                  els
-                  centres amb algun grau de complexitat per continuar fent front a la desigualtat educativa a la ciutat.
-                  https://t.co/xk61NqMs9A</td>
+                <td> @sirDukeDevin He'd be dead and the cops would have already investigated themselves and found no wrongdoing.</td>
               </tr>
               <tr>
                 <td>2021-06-23 12:33:44.00</td>
-                <td> オットとうまいメキシカンを食べに行ったんだよ🌮\n\n#makeonetwo
-                  https://t.co/YWuOjXWDur</td>
+                <td> Ukraine, US launch drills in Black Sea after warship incident https://t.co/aZxCIqO4vr</td>
               </tr>
 
             </tbody>

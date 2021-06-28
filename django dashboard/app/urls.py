@@ -10,7 +10,7 @@ from app import views
 urlpatterns = [
 
     # The home page
-    path('', views.home, name='dashboard-home'),
+    path('', views.home, name='home'),
 
     # The profile
     path('profile/', views.profile, name='dashboard-profile'),
@@ -28,7 +28,10 @@ urlpatterns = [
     #total average chart
     path('total-avg/', views.total_avg, name='total-avg-chart'),
 
+    #total score chart
+    path('total-count/', views.total_count, name='total-count-chart'),
+
     #tweets text
-    path('', views.get_tweets, name='tweet-text'),
+    path('tweet-text/', views.get_tweets, name='tweet-text'),
 
 ]

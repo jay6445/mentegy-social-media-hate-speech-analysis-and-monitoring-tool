@@ -123,7 +123,7 @@ def daily_avg(request):
     labels = []
     data = []
     queryset = Twitter_Streams.objects.raw(
-        "SELECT Avg(id) as id, DATE(created_at) as created_date , Avg(compound_score) as avg_compound_score from app_twitter_streams group by created_date order by created_date desc"
+        "SELECT Avg(id) as id, DATE(created_at) as created_date , Avg(compound_score) as avg_compound_score from app_twitter_streams group by created_date order by created_date desc limit 7"
     )
 
     for entry in queryset:
@@ -143,14 +143,35 @@ def get_tweets(request):
     labels = []
     data = []
 
-    queryset = Twitter_Streams.objects.values().order_by("-created_at")[:1]
+    queryset = Twitter_Streams.objects.values().order_by("-created_at")[:20]
     print(queryset)
     for entry in queryset:
         labels.append(entry["created_at"].strftime("%H:%M:%S"))
         data.append(entry["text"])
 
-        context = {
-            "data": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+    return JsonResponse(
+        data={
+            "labels": labels,
+            "data": data,
         }
-    # return response
-    return render(request, "index.html", context)
+    )
+
+def total_count(request):
+    labels = []
+    data = []
+
+    queryset = Twitter_Streams.objects.raw(
+        "SELECT Avg(id) as id, CASE WHEN compound_score > 0 THEN 'positive' WHEN compound_Score = 0 THEN 'neutral' ELSE 'negative' END AS score, count(compound_score) as score_count FROM app_twitter_streams Group by score;"
+    )
+
+    for entry in queryset:
+        # print(entry.created_date)
+        labels.append(entry.score)
+        data.append(entry.score_count)
+
+    return JsonResponse(
+        data={
+            "labels": labels,
+            "data": data,
+        }
+    )
