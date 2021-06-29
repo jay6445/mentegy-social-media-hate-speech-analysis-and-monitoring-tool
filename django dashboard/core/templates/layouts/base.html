@@ -120,6 +120,8 @@
   function dailyavgscores() {
 
     var $dailyavgChart = $("#daily-avg-chart");
+    
+
     $.ajax({
       url: $dailyavgChart.data("url"),
       success: function (data) {
@@ -218,28 +220,7 @@
             legend: {
               position: 'top',
             },
-            scales: {
-              xAxes: [{
-                display: true,
-                scaleLabel: {
-                  display: true,
-                  labelString: 'Day'
-                }
-              }],
-              yAxes: [{
-                display: true,
-                minBarLength: 100,
-                ticks: {
-
-                  stepSize: 0.1,// <----- This prop sets the stepSize
-                  max: 1
-                },
-                scaleLabel: {
-                  display: true,
-                  labelString: 'Score'
-                }
-              }]
-            },
+        
             title: {
               display: true,
               text: 'Live Sentiment Chart'
@@ -265,7 +246,7 @@
         gradientFill.addColorStop(0, "rgba(0, 255, 218, 1)");
         gradientFill.addColorStop(1, "rgba(0, 255, 218, 0.1)");
         new Chart(ctx, {
-          type: 'pie',
+          type: 'line',
           data: {
             labels: data.labels,
             datasets: [{

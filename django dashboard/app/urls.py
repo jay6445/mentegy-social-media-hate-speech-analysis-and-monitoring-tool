@@ -32,6 +32,6 @@ urlpatterns = [
     path('total-count/', views.total_count, name='total-count-chart'),
 
     #tweets text
-    path('tweet-text/', views.get_tweets, name='tweet-text'),
+    #path('tweet-text/', views.get_tweets, name='tweet-text'),
 
 ]

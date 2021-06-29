@@ -140,21 +140,13 @@ def daily_avg(request):
 
 
 def get_tweets(request):
-    labels = []
-    data = []
+   
+    tweets = Twitter_Streams.objects.all().order_by("-created_at")[:20]
+    print(tweets)
+    context = {"tweets": tweets}
 
-    queryset = Twitter_Streams.objects.values().order_by("-created_at")[:20]
-    print(queryset)
-    for entry in queryset:
-        labels.append(entry["created_at"].strftime("%H:%M:%S"))
-        data.append(entry["text"])
+    return render(request, "index.html", context)
 
-    return JsonResponse(
-        data={
-            "labels": labels,
-            "data": data,
-        }
-    )
 
 def total_count(request):
     labels = []

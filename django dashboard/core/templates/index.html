@@ -18,7 +18,7 @@
             <div class="card-body">
               <div class="row">
                 <div class="col">
-                  <h5 class="card-title text-uppercase text-muted mb-0">Traffic</h5>
+                  <h5 class="card-title text-uppercase text-muted mb-0">Tweets</h5>
                   <span class="h2 font-weight-bold mb-0">350,897</span>
                 </div>
                 <div class="col-auto">
@@ -221,7 +221,7 @@
           <div class="row align-items-center">
             <div class="col">
               <h6 class="text-uppercase text-muted ls-1 mb-1">Overview</h6>
-              <h2 class="mb-0">Tweet Count</h2>
+              <h2 class="mb-0">Tweet Count per Sentiment</h2>
             </div>
           </div>
         </div>
@@ -229,7 +229,7 @@
           <!-- Chart -->
           <div class="chart">
             <!--<canvas id="chart-orders" class="chart-canvas"></canvas>-->
-            <canvas id="total-count-chart" data-url="{% url 'total-count-chart' %}" ></canvas>
+            <canvas id="total-count-chart" data-url="{% url 'total-count-chart' %}"></canvas>
           </div>
         </div>
       </div>
@@ -265,24 +265,36 @@
               </tr>
             </thead>
             <tbody>
-              
+              {% for tweet in tweets %}
+              <tr>
+                <td>{{tweet.created_at}}</td>
+                <td>{{tweet.text}}</td>
+              </tr>
+
+              {% endfor %}
+
               <tr>
                 <td>2021-06-23 12:33:40.00</td>
-                <td>PSA to Black Americans/ADOS: You do not have the time or LUXURY to be worried about what’s  happening with other groups. Yes white supremacy has set several “houses” on fire but they did it to yours FIRST and you don’t have time to be running buckets of water to anybody else rn</td>
+                <td>PSA to Black Americans/ADOS: You do not have the time or LUXURY to be worried about what’s happening
+                  with other groups. Yes white supremacy has set several “houses” on fire but they did it to yours FIRST
+                  and you don’t have time to be running buckets of water to anybody else rn</td>
               </tr>
               <tr>
                 <td>2021-06-23 12:33:41.00</td>
-                <td> He was killed again for false accusations of being a sexual abuser.  Here is a link to an article about someone being killed for being falsely accused of being a pedo.  You are not very smart are you?  https://t.co/7NJxVPopCz https://t.co/7gO4zOg18k</td>
+                <td> He was killed again for false accusations of being a sexual abuser. Here is a link to an article
+                  about someone being killed for being falsely accused of being a pedo. You are not very smart are you?
+                  https://t.co/7NJxVPopCz https://t.co/7gO4zOg18k</td>
               </tr>
               <tr>
                 <td>2021-06-23 12:33:41.00</td>
-                <td>Youths held coalition strike wearing black shirt and marched onto roads in #Dawei this afternoon. 
+                <td>Youths held coalition strike wearing black shirt and marched onto roads in #Dawei this afternoon.
 
                   #RecognizeNUG #WhatsHappeningInMyanmar #June28Coup https://t.co/Q29fOFrgKb</td>
               </tr>
               <tr>
                 <td>2021-06-23 12:33:42.00</td>
-                <td> @sirDukeDevin He'd be dead and the cops would have already investigated themselves and found no wrongdoing.</td>
+                <td> @sirDukeDevin He'd be dead and the cops would have already investigated themselves and found no
+                  wrongdoing.</td>
               </tr>
               <tr>
                 <td>2021-06-23 12:33:44.00</td>

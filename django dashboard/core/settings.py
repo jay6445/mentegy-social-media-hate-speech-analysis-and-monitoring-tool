@@ -19,7 +19,7 @@ SECRET_KEY = config('SECRET_KEY', default='S#perS3crEt_1122')
 DEBUG = config('DEBUG', default=True, cast=bool)
 
 # load production server from .env
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', config('SERVER', default='127.0.0.1')]
+ALLOWED_HOSTS = ['*', config('SERVER', default='127.0.0.1')]
 
 # Application definition
 
@@ -76,8 +76,8 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'mentegy-prod',
         'USER': 'root',
-        'PASSWORD': 'root@123',
-        'HOST': '127.0.0.1',
+        'PASSWORD': 'root1234',
+        'HOST': 'mentegy-db.chjgq7ouvyat.eu-west-1.rds.amazonaws.com',
         'PORT': '3306',
     }
 }
