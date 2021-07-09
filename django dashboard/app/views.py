@@ -140,7 +140,7 @@ def daily_avg(request):
 
 
 def get_tweets(request):
-   
+
     tweets = Twitter_Streams.objects.all().order_by("-created_at")[:20]
     print(tweets)
     context = {"tweets": tweets}
@@ -151,9 +151,10 @@ def get_tweets(request):
 def total_count(request):
     labels = []
     data = []
-
+    print(date.today().strftime("%Y-%m-%d") + "%")
     queryset = Twitter_Streams.objects.raw(
-        "SELECT Avg(id) as id, CASE WHEN compound_score > 0 THEN 'positive' WHEN compound_Score = 0 THEN 'neutral' ELSE 'negative' END AS score, count(compound_score) as score_count FROM app_twitter_streams Group by score;"
+        "SELECT Avg(id) as id, CASE WHEN compound_score > 0 THEN 'positive' WHEN compound_Score = 0 THEN 'neutral' ELSE 'negative' END AS score, count(compound_score) as score_count FROM app_twitter_streams where created_at like %s Group by score;",
+        [date.today().strftime("%Y-%m-%d") + "%"]
     )
 
     for entry in queryset:
